@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if(!Bounds.Contains(target.position)){
+		if(!currentPoint.data.bounds.Contains(target.position)){
 			SetPoint(CameraPoint.GetClosestToWorldPos(target.position, currentPoint));
 		}
 	}
@@ -26,9 +26,10 @@ public class CameraController : MonoBehaviour {
 		Main.transform.position = newPos;
 		Main.orthographicSize = newPoint.data.orthographicSize;
 		currentPoint = newPoint;
-		target.transform.position = newPoint.data.ClosestSpawnPoint(target.position);
-		if(!Bounds.Contains(target.position)){
-			Debug.LogError ("Spawn point is off camera");
+
+		Vector2 spawnPoint = newPoint.data.ClosestSpawnPoint(target.position);
+		if(spawnPoint.magnitude > Vector2.negativeInfinity.magnitude){
+			target.transform.position = spawnPoint;
 		}
 	}
 

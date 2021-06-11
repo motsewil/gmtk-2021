@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class CameraPoint : MonoBehaviour {
 	
-	public CameraData data;
+	public LevelData data;
+
+	private void OnValidate() {
+		data.position = transform.position;
+	}
 
 	public static List<CameraPoint> AllPoints {
 		get {
@@ -59,20 +63,37 @@ public class CameraPoint : MonoBehaviour {
 		foreach(Vector2 vec in data.spawnPoints){
 			Gizmos.DrawSphere(vec, 0.25f);
 		}
+		
+		bottomLeft = data.bounds.center - (data.bounds.size * 0.5f);
+		topLeft = data.bounds.center - new Vector3(data.bounds.size.x, -data.bounds.size.y, 0f) * 0.5f;
+		topRight = data.bounds.center + (data.bounds.size * 0.5f);
+		bottomRight = data.bounds.center + new Vector3(data.bounds.size.x, -data.bounds.size.y, 0f) * 0.5f;
+		Gizmos.color = Color.blue;
+		Gizmos.DrawLine(bottomLeft, topLeft);
+		Gizmos.DrawLine(bottomLeft, bottomRight);
+		Gizmos.DrawLine(bottomRight, topRight);
+		Gizmos.DrawLine(topLeft, topRight);
 	}
 }
 
 [System.Serializable]
-public struct CameraData {
+public struct LevelData {
 	[Min(1)]
 	public float orthographicSize;
 
 	public List<Vector2> spawnPoints;
 
+	public Vector3 position;
+
+	public Bounds bounds {
+		get {
+			return new Bounds(position, new Vector3(orthographicSize * 2.5f * CameraController.Main.aspect, orthographicSize * 2.5f, float.MaxValue));
+		}
+	}
+
 	public Vector2 ClosestSpawnPoint(Vector3 worldPos){
 		if(spawnPoints == null || spawnPoints.Count ==0){
-			Debug.LogError("No spawn points");
-			return Vector2.zero;
+			return Vector2.negativeInfinity;
 		}
 		Vector2 closest = spawnPoints[0];
 		foreach(Vector2 vec in spawnPoints){
