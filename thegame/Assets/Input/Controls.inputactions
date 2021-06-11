@@ -6,7 +6,7 @@
             "id": "b3f87c09-ee1a-4a65-9b66-f35c2dfa54b5",
             "actions": [
                 {
-                    "name": "Attack",
+                    "name": "Jump",
                     "type": "Button",
                     "id": "b0639667-0f21-4207-aae7-9cd3e6168d1d",
                     "expectedControlType": "Button",
@@ -30,25 +30,14 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aad02e0d-cd75-4848-a8b9-e93147d77eeb",
-                    "path": "<DualShockGamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "2D Vector",
                     "id": "e71507e3-d282-455e-b5be-bc579fb97668",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -57,7 +46,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "77bf5428-39cf-442c-8591-41306f93aa57",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -68,7 +57,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Down",
                     "id": "029381ff-8c6b-418c-b1ab-4d413a00db81",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -79,9 +68,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
-                    "id": "67cde7aa-70e6-4c48-921d-113ce6256f6d",
-                    "path": "",
+                    "name": "Left",
+                    "id": "072dcd74-cb58-4dc9-9de3-a757345ee112",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -90,9 +79,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "995e698a-5a96-42f9-886a-153a53f2de9b",
-                    "path": "",
+                    "name": "Right",
+                    "id": "085f89dc-8f67-4a02-bbdd-bf0493b1279b",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
