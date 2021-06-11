@@ -11,8 +11,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	[BoxGroup("Movement")][Min(0)][SerializeField]
 		private float jumpForce = 200f;
-	[BoxGroup("Movement")][Min(0)][SerializeField]
-		private float moveSpeed = 20f;
+	[BoxGroup("Movement")][Range(1, 10)][SerializeField]
+		private float moveAcceleration = 2f;
+	[BoxGroup("Movement")][Range(1, 10)][SerializeField]
+		private float moveSpeed = 10f;
 	private Vector2 movementVector;
 
 	private void Reset() {
@@ -20,7 +22,12 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void Update() {
-		rigidbody.AddForce(movementVector * moveSpeed);
+		UpdateMovement();
+	}
+
+	private void UpdateMovement() {
+		rigidbody.AddForce(movementVector * moveAcceleration);
+		rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
 	}
 
 	private void OnMovement(InputValue value) {

@@ -79,7 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 5436337519363147928}
   jumpForce: 200
-  moveSpeed: 20
+  moveAcceleration: 10
+  moveSpeed: 5
 --- !u!50 &5436337519363147928
 Rigidbody2D:
   serializedVersion: 4
