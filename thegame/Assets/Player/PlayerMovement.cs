@@ -17,14 +17,32 @@ public class PlayerMovement : MonoBehaviour {
 		private float moveSpeed = 10f;
 	private Vector2 movementVector;
 
+	[BoxGroup("Aiming")][SerializeField]
+		private Transform aimReticle;
+	private Vector2 aimPosition;
+
 	private void Reset() {
 		rigidbody = GetComponent<Rigidbody2D>();
 	}
 
 	private void Update() {
 		UpdateMovement();
+		UpdateAim();
 	}
 
+#region Aim
+	private void UpdateAim() {
+		// TODO screen to camera
+		// set aim ret to position
+		Debug.Log(aimPosition);
+	}
+
+	private void OnAim(InputValue value) {
+		aimPosition = value.Get<Vector2>();
+	}
+#endregion
+
+#region Movement
 	private void UpdateMovement() {
 		rigidbody.AddForce(movementVector * moveAcceleration);
 		rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
@@ -38,5 +56,5 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 jumpVector = new Vector2(0, jumpForce);
 		rigidbody.AddForce(jumpVector);
 	}
-
+#endregion
 }
