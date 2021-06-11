@@ -32,9 +32,9 @@ public class PlayerMovement : MonoBehaviour {
 
 #region Aim
 	private void UpdateAim() {
-		// TODO screen to camera
-		// set aim ret to position
-		Debug.Log(aimPosition);
+		Camera cam = CameraController.Main;
+		Vector3 position = new Vector3(aimPosition.x, aimPosition.y, -cam.transform.position.z);
+		aimReticle.position = cam.ScreenToWorldPoint(position);
 	}
 
 	private void OnAim(InputValue value) {
