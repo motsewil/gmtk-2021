@@ -482,6 +482,7 @@ MonoBehaviour:
     orthographicSize: 4
     spawnPoints:
     - {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
 --- !u!4 &1365277574
 Transform:
   m_ObjectHideFlags: 0
@@ -596,6 +597,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5051516251099322008, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 458896877}
     - target: {fileID: 6039202652471283374, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
       propertyPath: m_Name
       value: Player

@@ -17,7 +17,7 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "d5880ff5-2a15-4714-9129-3fe414330d1c",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -51,9 +51,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "AD",
                     "id": "e71507e3-d282-455e-b5be-bc579fb97668",
-                    "path": "2DVector(mode=2)",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -62,30 +62,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Up",
+                    "name": "Negative",
                     "id": "77bf5428-39cf-442c-8591-41306f93aa57",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Down",
-                    "id": "029381ff-8c6b-418c-b1ab-4d413a00db81",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Left",
-                    "id": "072dcd74-cb58-4dc9-9de3-a757345ee112",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -95,9 +73,42 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Right",
-                    "id": "085f89dc-8f67-4a02-bbdd-bf0493b1279b",
+                    "name": "Positive",
+                    "id": "029381ff-8c6b-418c-b1ab-4d413a00db81",
                     "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left RIght",
+                    "id": "5c7735e0-63cd-4f99-b6a8-189d78f2f508",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "a9a43c68-3441-401c-a985-6407ac8f626a",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "d3340d4b-9643-4de0-9072-d7abdf1d2707",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

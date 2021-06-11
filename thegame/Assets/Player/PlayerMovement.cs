@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 		private float moveAcceleration = 2f;
 	[BoxGroup("Movement")][Range(1, 10)][SerializeField]
 		private float moveSpeed = 10f;
-	private Vector2 movementVector;
+	private float moveAxis;
 
 	[BoxGroup("Aiming")][SerializeField]
 		private Transform aimReticle;
@@ -44,12 +44,13 @@ public class PlayerMovement : MonoBehaviour {
 
 #region Movement
 	private void UpdateMovement() {
-		rigidbody.AddForce(movementVector * moveAcceleration);
+		Vector2 force = new Vector2(moveAxis, 0) * moveAcceleration;
+		rigidbody.AddForce(force);
 		rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
 	}
 
 	private void OnMovement(InputValue value) {
-		movementVector = value.Get<Vector2>();
+		moveAxis = value.Get<float>();
 	}
 
 	private void OnJump(InputValue value) {
