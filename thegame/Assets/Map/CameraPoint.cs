@@ -30,9 +30,18 @@ public class CameraPoint : MonoBehaviour {
 		CameraPoint closest = null;
 		foreach(CameraPoint point in AllPoints){
 			if(exclusions == null || !exclusions.Contains(point)){
-				if(closest == null || 
-					Vector2.Distance(worldPos, point.transform.position) < Vector2.Distance(worldPos, closest.transform.position)){
+				if(closest == null){
 					closest = point;
+				} else {
+					float distToPoint   = Vector2.Distance(worldPos, point.transform.position);
+					float distToClosest = Vector2.Distance(worldPos, closest.transform.position);
+					if(distToPoint < distToClosest ){
+						closest = point;
+					} else if( distToPoint == distToClosest ){
+						if(point.data.orthographicSize < closest.data.orthographicSize){
+							closest = point;
+						}
+					}
 				}
 			}
 		}

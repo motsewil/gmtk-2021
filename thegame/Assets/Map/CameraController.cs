@@ -9,22 +9,32 @@ public class CameraController : MonoBehaviour {
 	private Transform target;
 
 	private CameraPoint currentPoint;
+	[SerializeField]
+	private float transitionSpeed = 10f;
 
 	private void Start() {
 		SetPoint(CameraPoint.GetClosestToWorldPos(target.position));
 	}
 
 	private void Update() {
-		if(!currentPoint.data.bounds.Contains(target.position)){
+		CameraPoint closestPoint = CameraPoint.GetClosestToWorldPos(target.position);
+		if(currentPoint != closestPoint && closestPoint.data.bounds.Contains(target.position)){
+			SetPoint(closestPoint);
+		} else if( !currentPoint.data.bounds.Contains(target.position)){
 			SetPoint(CameraPoint.GetClosestToWorldPos(target.position, currentPoint));
 		}
+		UpdateView();
+	}
+
+	private void UpdateView(){
+		
+		Vector3 newPos = Vector3.Lerp(transform.position, currentPoint.transform.position, Time.deltaTime * transitionSpeed);
+		newPos.z = Main.transform.position.z;
+		Main.transform.position = newPos;
+		Main.orthographicSize = Mathf.Lerp(Main.orthographicSize, currentPoint.data.orthographicSize, Time.deltaTime * transitionSpeed);
 	}
 
 	private void SetPoint(CameraPoint newPoint){
-		Vector3 newPos = newPoint.transform.position;
-		newPos.z = Main.transform.position.z;
-		Main.transform.position = newPos;
-		Main.orthographicSize = newPoint.data.orthographicSize;
 		currentPoint = newPoint;
 
 		Vector2 spawnPoint = newPoint.data.ClosestSpawnPoint(target.position);
