@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	[BoxGroup("Components")][SerializeField]
 		private new Rigidbody2D rigidbody;
+	[BoxGroup("Components")][SerializeField]
+		private LineRenderer lineRenderer;
 
 	[BoxGroup("Movement")][Min(0)][SerializeField]
 		private float jumpForce = 200f;
@@ -26,12 +28,18 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector2 moveVector;
 	private bool isGrounded;
 
-	[BoxGroup("Aiming")][SerializeField]
+	[BoxGroup("Grabber")][SerializeField]
 		private Transform aimReticle;
+	[BoxGroup("Grabber")][Range(0, 100)][SerializeField]
+		private float grabberRange = 10f;
+	[BoxGroup("Grabber")][SerializeField]
+		private Transform grabber;
+	
 	private Vector2 aimPosition;
 
 	private void Reset() {
 		rigidbody = GetComponent<Rigidbody2D>();
+		lineRenderer = GetComponent<LineRenderer>();
 	}
 
 	private void Update() {
@@ -45,15 +53,26 @@ public class PlayerMovement : MonoBehaviour {
 		Camera cam = CameraController.Main;
 		Vector3 position = new Vector3(aimPosition.x, aimPosition.y, -cam.transform.position.z);
 		aimReticle.position = cam.ScreenToWorldPoint(position);
+		lineRenderer.SetPosition(lineRenderer.positionCount - 1, aimReticle.position);
+
+		Vector3 dir = aimReticle.position - grabber.position;
+		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+		grabber.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
 	}
 
 	private void OnAim(InputValue value) {
 		aimPosition = value.Get<Vector2>();
 	}
+
+	private void OnFire(InputValue value) {
+		// TODO cast ray out in the dir of the reticle and try grab something
+	}
 #endregion
 
 #region Movement
 	private void UpdateMovement() {
+		lineRenderer.SetPosition(0, grabber.position);
 		rigidbody.AddForce(moveVector * moveAcceleration);
 		rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
 	}
