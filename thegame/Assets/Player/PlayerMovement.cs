@@ -20,12 +20,17 @@ public class PlayerMovement : MonoBehaviour {
 		private float moveAcceleration = 2f;
 	[BoxGroup("Movement")][Range(1, 10)][SerializeField]
 		private float moveSpeed = 10f;
+	[BoxGroup("Movement")][Range(1, 100)][SerializeField]
+		private float jumpSpeed = 20f;
 	[BoxGroup("Movement")][SerializeField]
 		private Vector2 groundRayOrigin = Vector2.zero;
 	[BoxGroup("Movement")][Range(0, 2)][SerializeField]
 		private float groundRayDist = 1f;
+	[BoxGroup("Movement")][Range(0, 1)][SerializeField]
+		private float groundedCooldown = 0.1f;
 	
 	private Vector2 moveVector;
+	private float jumpTime;
 	private bool isGrounded;
 
 	[BoxGroup("Grabber")][SerializeField][Tooltip("The grabber will collide with ANY of these layers")]
@@ -97,10 +102,16 @@ public class PlayerMovement : MonoBehaviour {
 		rigidbody.AddForce(moveVector * moveAcceleration);
 		// rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
 		float xVel = Mathf.Clamp(rigidbody.velocity.x, -moveSpeed, moveSpeed);
+		float yVel = rigidbody.velocity.y;
 		if(moveVector.magnitude < Mathf.Epsilon){
 			xVel = Mathf.Lerp(rigidbody.velocity.x, 0f, Time.deltaTime * moveAcceleration);
 		}
-		rigidbody.velocity = new Vector2(xVel, rigidbody.velocity.y);
+		if(!isGrounded){
+			yVel -= Time.deltaTime * jumpSpeed;
+		} else {
+			yVel = 0f;
+		}
+		rigidbody.velocity = new Vector2(xVel, yVel);
 	}
 
 	private void OnMovement(InputValue value) {
@@ -126,17 +137,18 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void SetGrounded(bool grounded) {
-		isGrounded = grounded;
-		if (grounded) {
-			rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
+		if(grounded && (Time.time - jumpTime) < groundedCooldown){
+			return;
 		}
+		isGrounded = grounded;
+		jumpTime = Time.time;
 	}
 
 	private void OnJump(InputValue value) {
 		if (isGrounded) {
 			Vector2 jumpVector = new Vector2(0, jumpForce);
-			rigidbody.AddForce(jumpVector);
 			SetGrounded(false);
+			rigidbody.AddForce(jumpVector);
 		}
 	}
 

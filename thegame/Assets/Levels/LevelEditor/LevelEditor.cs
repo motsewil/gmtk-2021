@@ -19,6 +19,7 @@ public class LevelEditor : MonoBehaviour {
 	private GameObject root;
 	private bool placing = false;
 	private bool removing = false;
+	private bool background = false;
 
 	private void Update () {
 		// Darren if you see this I'm sorry
@@ -51,14 +52,27 @@ public class LevelEditor : MonoBehaviour {
 		Transform parent = root.transform;
 		for (int i = parent.childCount - 1; i >= 0; i--) {
 			Transform child = parent.GetChild (i);
-			if (Vector3.Distance (child.transform.position, potentialObject.transform.position) == 0) {
+			if (!background && Vector3.Distance (child.transform.position, potentialObject.transform.position) == 0) {
 				Destroy (child.gameObject);
 			} else {
-				child.GetComponent<LevelTile> ().PopulateAdjacencies ();
+				LevelTile t = child.GetComponent<LevelTile> ();
+				if(t!=null){
+					t.PopulateAdjacencies ();
+				}
 			}
 		}
-		potentialObject.GetComponent<LevelTile> ().PopulateAdjacencies ();
+		LevelTile tile = potentialObject.GetComponent<LevelTile> ();
+		if(tile != null){
+			tile.PopulateAdjacencies ();
+		}
 		potentialObject.transform.SetParent (parent);
+		if(background){
+			potentialObject.transform.position = new Vector3(
+				potentialObject.transform.position.x,
+				potentialObject.transform.position.y,
+				-0.1f
+				);
+		}
 		potentialObject = null;
 		UpdateCurrentPrefab ();
 	}
@@ -75,6 +89,10 @@ public class LevelEditor : MonoBehaviour {
 		index++;
 		index = index >= tilePrefabs.Length ? index - tilePrefabs.Length : index;
 		UpdateCurrentPrefab ();
+	}
+
+	private void OnBackground (InputValue value){
+		background = value.Get<float> () == 1f;
 	}
 
 	private void OnAim (InputValue value) {

@@ -365,6 +365,7 @@ MonoBehaviour:
   - {fileID: 1035095836249389705, guid: a4ad8f358b3445141923311e320cd80c, type: 3}
   - {fileID: 1035095836249389705, guid: d4d22cfccfaade64d8dee50291f79ba3, type: 3}
   - {fileID: 1035095836249389705, guid: 370c0c97bdb324248a081a76e794fd34, type: 3}
+  - {fileID: 1035095836249389705, guid: 1fc152e910510504eabe45063da538e7, type: 3}
   currentPrefab: {fileID: 0}
   potentialObject: {fileID: 0}
   root: {fileID: 1491639827}
