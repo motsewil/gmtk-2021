@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector2 moveVector;
 	private bool isGrounded;
 
+	[BoxGroup("Grabber")][SerializeField][Tooltip("The grabber will collide with ANY of these layers")]
+		private LayerMask[] grabberLayerMasks;
 	[BoxGroup("Grabber")][SerializeField]
 		private Transform aimReticle;
 	[BoxGroup("Grabber")][Range(0, 100)][SerializeField]
@@ -66,7 +68,21 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void OnFire(InputValue value) {
-		// TODO cast ray out in the dir of the reticle and try grab something
+
+		ContactFilter2D filter = new ContactFilter2D();
+		filter.SetLayerMask(LayerMask.GetMask("Groundable"));
+
+		List<RaycastHit2D> results = new List<RaycastHit2D>(1);
+		Vector2 direction = aimReticle.position - grabber.position;
+		if (Physics2D.Raycast(grabber.position, direction, filter, results, grabberRange) > 0) {
+			LevelTile tile;
+			if (results[0].collider.TryGetComponent<LevelTile>(out tile)) {
+				if (tile.tags.Contains(LevelTileTags.Grabbable)) {
+					tile.GetComponent<SpriteRenderer>().material.color = Color.red;
+					Debug.Log(tile.name);
+				}
+			}
+		}
 	}
 #endregion
 
