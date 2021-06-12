@@ -27,7 +27,9 @@ public class LevelTile : MonoBehaviour {
 
 	public void Yoink(Vector2 origin) {
 		if (rigidbody) {
-			rigidbody.velocity = (origin - (Vector2)transform.position).normalized * yoinkSpeed;
+			Vector2 direction = (origin - (Vector2)transform.position).normalized;
+			direction = Util.RoundToDegrees(direction, 90);
+			rigidbody.velocity = direction * yoinkSpeed;
 		}
 		// TODO add juice event!
 	}
