@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour {
 
+	[BoxGroup("CHEATS")][SerializeField][OnValueChanged("OnFlyToggled")]
+		private bool flyCheat;
+
 	[BoxGroup("Components")][SerializeField]
 		private new Rigidbody2D rigidbody;
 
@@ -15,7 +18,8 @@ public class PlayerMovement : MonoBehaviour {
 		private float moveAcceleration = 2f;
 	[BoxGroup("Movement")][Range(1, 10)][SerializeField]
 		private float moveSpeed = 10f;
-	private float moveAxis;
+	private Vector2 moveVector;
+	private bool grounded;
 
 	[BoxGroup("Aiming")][SerializeField]
 		private Transform aimReticle;
@@ -26,6 +30,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void Update() {
+		CheckGrounded();
 		UpdateMovement();
 		UpdateAim();
 	}
@@ -44,18 +49,30 @@ public class PlayerMovement : MonoBehaviour {
 
 #region Movement
 	private void UpdateMovement() {
-		Vector2 force = new Vector2(moveAxis, 0) * moveAcceleration;
-		rigidbody.AddForce(force);
+		rigidbody.AddForce(moveVector * moveSpeed);
 		rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
 	}
 
 	private void OnMovement(InputValue value) {
-		moveAxis = value.Get<float>();
+		moveVector = value.Get<Vector2>();
+		if (!flyCheat) {
+			moveVector.y = 0;
+		}
+	}
+
+	private void CheckGrounded() {
+		// TODO
 	}
 
 	private void OnJump(InputValue value) {
 		Vector2 jumpVector = new Vector2(0, jumpForce);
 		rigidbody.AddForce(jumpVector);
+	}
+#endregion
+
+#region CHEATS
+	private void OnFlyToggled() {
+		rigidbody.gravityScale = flyCheat ? 0 : 1;
 	}
 #endregion
 }
