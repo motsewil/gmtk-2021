@@ -104,10 +104,10 @@ public class PlayerMovement : MonoBehaviour {
 		float xVel = Mathf.Clamp(rigidbody.velocity.x, -moveSpeed, moveSpeed);
 		float yVel = rigidbody.velocity.y;
 		if(moveVector.magnitude < Mathf.Epsilon){
-			xVel = Mathf.Lerp(rigidbody.velocity.x, 0f, Time.deltaTime * moveAcceleration);
+			xVel = Mathf.Lerp(rigidbody.velocity.x, 0f, Time.fixedDeltaTime * moveAcceleration);
 		}
 		if(!isGrounded){
-			yVel -= Time.deltaTime * jumpSpeed;
+			yVel -= Time.fixedDeltaTime * jumpSpeed;
 		} else {
 			yVel = 0f;
 		}
@@ -122,17 +122,17 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void CheckGrounded() {
-		if (rigidbody.velocity.y < 0) {
-			Vector2 rayPos = ((Vector2)transform.position) + groundRayOrigin;
-			int groundedMask = LayerMask.GetMask("Groundable");
-			Debug.DrawRay(rayPos, Vector2.down * groundRayDist, Color.yellow, 0.1f);
-			List<RaycastHit2D> results = new List<RaycastHit2D>(1);
-			ContactFilter2D cf = new ContactFilter2D();
-			cf.SetLayerMask(groundedMask);
-			if (Physics2D.Raycast(rayPos, Vector2.down, cf, results, groundRayDist) > 0) {
-				transform.position = results[0].point;
-				SetGrounded(true);
-			}
+		Vector2 rayPos = ((Vector2)transform.position) + groundRayOrigin;
+		int groundedMask = LayerMask.GetMask("Groundable");
+		Debug.DrawRay(rayPos, Vector2.down * groundRayDist, Color.yellow, 0.1f);
+		List<RaycastHit2D> results = new List<RaycastHit2D>(1);
+		ContactFilter2D cf = new ContactFilter2D();
+		cf.SetLayerMask(groundedMask);
+		if (!isGrounded && Physics2D.Raycast(rayPos, Vector2.down, cf, results, groundRayDist) > 0) {
+			transform.position = results[0].point;
+			SetGrounded(true);
+		}else {
+			SetGrounded(false);
 		}
 	}
 
@@ -141,7 +141,6 @@ public class PlayerMovement : MonoBehaviour {
 			return;
 		}
 		isGrounded = grounded;
-		jumpTime = Time.time;
 	}
 
 	private void OnJump(InputValue value) {
