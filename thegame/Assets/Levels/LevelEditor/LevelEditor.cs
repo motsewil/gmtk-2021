@@ -21,6 +21,8 @@ public class LevelEditor : MonoBehaviour {
 	private bool removing = false;
 
 	private void Update () {
+		// Darren if you see this I'm sorry
+		root = CameraPoint.GetClosestToWorldPos(transform.position).transform.parent.GetChild(1).gameObject;
 		currentPrefab = tilePrefabs[0];
 
 		Vector3 targetPos = new Vector3 (mousePos.x, mousePos.y, -CameraController.Main.transform.position.z);

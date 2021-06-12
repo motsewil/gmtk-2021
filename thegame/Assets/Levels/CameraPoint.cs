@@ -13,10 +13,8 @@ public class CameraPoint : MonoBehaviour {
 
 	public static List<CameraPoint> AllPoints {
 		get {
-			if(_allPoints == null){
-				_allPoints = new List<CameraPoint>();
-				_allPoints.AddRange(GameObject.FindObjectsOfType<CameraPoint>());
-			}
+			_allPoints = new List<CameraPoint>();
+			_allPoints.AddRange(GameObject.FindObjectsOfType<CameraPoint>());
 			return _allPoints;
 		}
 	}
