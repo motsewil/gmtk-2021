@@ -165,8 +165,8 @@ MonoBehaviour:
   jumpForce: 200
   moveAcceleration: 10
   moveSpeed: 5
-  rayOrigin: {x: 0, y: 0}
-  rayDist: 0.18
+  groundRayOrigin: {x: 0, y: 0}
+  groundRayDist: 0.15
   aimReticle: {fileID: 1791541012}
 --- !u!50 &5436337519363147928
 Rigidbody2D:

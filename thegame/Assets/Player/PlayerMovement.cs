@@ -19,9 +19,9 @@ public class PlayerMovement : MonoBehaviour {
 	[BoxGroup("Movement")][Range(1, 10)][SerializeField]
 		private float moveSpeed = 10f;
 	[BoxGroup("Movement")][SerializeField]
-		private Vector2 rayOrigin = Vector2.zero;
+		private Vector2 groundRayOrigin = Vector2.zero;
 	[BoxGroup("Movement")][Range(0, 2)][SerializeField]
-		private float rayDist = 1f;
+		private float groundRayDist = 1f;
 	
 	private Vector2 moveVector;
 	private bool isGrounded;
@@ -66,17 +66,16 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void CheckGrounded() {
-		if (rigidbody.velocity.y < 0) { // TODO ignore when already grounded? need to fix walking off platform
-			Vector2 rayPos = ((Vector2)transform.position) + rayOrigin;
+		if (rigidbody.velocity.y < 0) {
+			Vector2 rayPos = ((Vector2)transform.position) + groundRayOrigin;
 			int groundedMask = LayerMask.GetMask("Groundable");
-			Debug.DrawRay(rayPos, Vector2.down * rayDist, Color.yellow, 0.1f);
+			Debug.DrawRay(rayPos, Vector2.down * groundRayDist, Color.yellow, 0.1f);
 			List<RaycastHit2D> results = new List<RaycastHit2D>(1);
 			ContactFilter2D cf = new ContactFilter2D();
 			cf.SetLayerMask(groundedMask);
-			if (Physics2D.Raycast(rayPos, Vector2.down, cf, results, rayDist) > 0) {
+			if (Physics2D.Raycast(rayPos, Vector2.down, cf, results, groundRayDist) > 0) {
 				transform.position = results[0].point;
 				SetGrounded(true);
-
 			}
 		}
 	}
