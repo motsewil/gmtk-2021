@@ -9,11 +9,20 @@ public class LevelTile : MonoBehaviour {
 	public List<LevelTileTags> tags;
 	public LevelTileType type;
 
+	[SerializeField] private float yoinkSpeed = 5f;
+	[SerializeField] private new Rigidbody2D rigidbody;
 
 	[SerializeField]
 	private List<AdjacentSprites> adjacentSprites;
 	[SerializeField]
 	private Sprite defaultSprite;
+
+	public void Yoink(Vector2 origin) {
+		if (rigidbody) {
+			rigidbody.velocity = (origin - (Vector2)transform.position).normalized * yoinkSpeed;
+		}
+		// TODO add juice event!
+	}
 
 	[Button]
 	public void PopulateAdjacencies () {

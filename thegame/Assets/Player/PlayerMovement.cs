@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (results[0].collider.TryGetComponent<LevelTile>(out tile)) {
 				if (tile.tags.Contains(LevelTileTags.Grabbable)) {
 					tile.GetComponent<SpriteRenderer>().material.color = Color.red;
-					Debug.Log(tile.name);
+					tile.Yoink(grabber.position);
 				}
 			}
 		}
