@@ -9,8 +9,6 @@ public class LevelTile : MonoBehaviour {
 	public List<LevelTileTags> tags;
 	public LevelTileType type;
 
-	[SerializeField]
-	private Transform levelRoot;
 
 	[SerializeField]
 	private List<AdjacentSprites> adjacentSprites;
@@ -18,10 +16,10 @@ public class LevelTile : MonoBehaviour {
 	private Sprite defaultSprite;
 
 	[Button]
-	private void PopulateAdjacencies () {
+	public void PopulateAdjacencies () {
 		LevelTileAdjacency adjacency;
 		adjacency = LevelTileAdjacency.None;
-		if (levelRoot == null) {
+		if (transform.parent == null) {
 			return;
 		}
 
@@ -31,8 +29,8 @@ public class LevelTile : MonoBehaviour {
 		Vector2 left = origin + Vector2.left;
 		Vector2 right = origin + Vector2.right;
 
-		for (int i = 0; i < levelRoot.childCount; i++) { 
-			Transform potentialAdj = levelRoot.GetChild(i);
+		for (int i = 0; i < transform.parent.childCount; i++) { 
+			Transform potentialAdj = transform.parent.GetChild(i);
 			if(Vector2.Distance(up, potentialAdj.position) < 0.1f){
 				adjacency |= LevelTileAdjacency.Up;
 			}

@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "RemoveItem",
+                    "type": "Value",
+                    "id": "c0189a53-fda5-46e8-84d9-fb100f84dd44",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -94,6 +102,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PlaceItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fcb8afc4-47ee-4798-8d19-42fc55bec536",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RemoveItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
