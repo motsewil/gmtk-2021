@@ -17,9 +17,19 @@ public class LevelTile : MonoBehaviour {
 	[SerializeField]
 	private Sprite defaultSprite;
 
+	private void Reset() {
+		if (tags.Contains(LevelTileTags.Grabbable)) {
+			if (rigidbody == null) {
+				TryGetComponent<Rigidbody2D>(out rigidbody);
+			}
+		}
+	}
+
 	public void Yoink(Vector2 origin) {
 		if (rigidbody) {
-			rigidbody.velocity = (origin - (Vector2)transform.position).normalized * yoinkSpeed;
+			Vector2 direction = (origin - (Vector2)transform.position).normalized;
+			direction = Util.RoundToDegrees(direction, 90);
+			rigidbody.velocity = direction * yoinkSpeed;
 		}
 		// TODO add juice event!
 	}
