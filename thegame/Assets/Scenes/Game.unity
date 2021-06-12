@@ -902,6 +902,14 @@ PrefabInstance:
       propertyPath: m_BodyType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1306137295162267386, guid: b1d025e1642e64c439753f00296be091, type: 3}
+      propertyPath: data.position.x
+      value: 19.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306137295162267386, guid: b1d025e1642e64c439753f00296be091, type: 3}
+      propertyPath: data.position.y
+      value: 0.36
+      objectReference: {fileID: 0}
     - target: {fileID: 1306137296331521160, guid: b1d025e1642e64c439753f00296be091, type: 3}
       propertyPath: m_RootOrder
       value: 1
