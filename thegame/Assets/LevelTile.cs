@@ -16,22 +16,71 @@ public class LevelTile : MonoBehaviour {
 	private List<AdjacentSprites> adjacentSprites;
 	[SerializeField]
 	private Sprite defaultSprite;
+	
+	private List<LevelTile> neighbors = new List<LevelTile>();
 
 	private void Reset() {
 		if (tags.Contains(LevelTileTags.Grabbable)) {
 			if (rigidbody == null) {
+				
 				TryGetComponent<Rigidbody2D>(out rigidbody);
 			}
 		}
 	}
 
+	private void Awake(){
+		ResetNeighbours();
+	}
+
+	private void ResetNeighbours(){
+		RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 1f, transform.up);
+		neighbors = new List<LevelTile>();
+		for(int i = 0; i < hits.Length; i++){
+			RaycastHit2D hit = hits[i];
+			LevelTile tile = hit.transform.GetComponent<LevelTile>();
+			if(tile){
+				neighbors.Add(tile);
+			}
+		}
+	}
+
+	public Vector2 yoinkOrigin = Vector2.negativeInfinity;
 	public void Yoink(Vector2 origin) {
 		if (rigidbody) {
-			Vector2 direction = (origin - (Vector2)transform.position).normalized;
-			direction = Util.RoundToDegrees(direction, 90);
-			rigidbody.velocity = direction * yoinkSpeed;
+			yoinkOrigin = origin;
+			rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 		}
 		// TODO add juice event!
+	}
+
+	private void Update(){
+		if(!float.IsInfinity(yoinkOrigin.magnitude)&& rigidbody){
+			rigidbody.velocity = (yoinkOrigin - (Vector2)transform.position).normalized * yoinkSpeed;
+		}
+		if(rigidbody && rigidbody.velocity.magnitude < Mathf.Epsilon && !float.IsInfinity(gridPos.magnitude)){
+			transform.localPosition = Vector3.Lerp(transform.localPosition, gridPos, Time.deltaTime * gridSmooth);
+		}
+
+	}
+
+	private Vector3 gridPos = Vector3.negativeInfinity;
+	[SerializeField]
+	private float gridSmooth = 10f;
+	private void OnCollisionEnter2D(Collision2D other) {
+		LevelTile tile = other.gameObject.GetComponent<LevelTile>();
+		if(tile && !neighbors.Contains(tile)){
+			if(!float.IsInfinity(yoinkOrigin.magnitude)){
+				gridPos = new Vector3(
+					Mathf.Floor(transform.localPosition.x) + 0.5f,
+					Mathf.Floor(transform.localPosition.y) + 0.5f,
+					transform.localPosition.z
+				);
+			}
+			yoinkOrigin = Vector2.negativeInfinity;
+			rigidbody.velocity = Vector2.zero;
+			rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+			ResetNeighbours();
+		}
 	}
 
 	[Button]
