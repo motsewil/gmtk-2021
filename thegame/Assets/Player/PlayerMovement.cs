@@ -70,7 +70,12 @@ public class PlayerMovement : MonoBehaviour {
 	private void OnFire(InputValue value) {
 
 		ContactFilter2D filter = new ContactFilter2D();
-		filter.SetLayerMask(LayerMask.GetMask("Groundable"));
+		int layerMask = 0;
+		foreach (int m in grabberLayerMasks)
+		{
+			layerMask |= m;
+		}
+		filter.SetLayerMask(layerMask);
 
 		List<RaycastHit2D> results = new List<RaycastHit2D>(1);
 		Vector2 direction = aimReticle.position - grabber.position;

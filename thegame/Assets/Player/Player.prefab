@@ -247,11 +247,14 @@ MonoBehaviour:
   flyCheat: 0
   rigidbody: {fileID: 5436337519363147928}
   lineRenderer: {fileID: 2667108565717545325}
-  jumpForce: 200
+  jumpForce: 400
   moveAcceleration: 10
   moveSpeed: 5
   groundRayOrigin: {x: 0, y: 0}
   groundRayDist: 0.15
+  grabberLayerMasks:
+  - serializedVersion: 2
+    m_Bits: 8
   aimReticle: {fileID: 1791541012}
   grabberRange: 10
   grabber: {fileID: 3521611665039146491}

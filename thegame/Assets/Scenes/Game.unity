@@ -568,7 +568,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1035095836249389702, guid: a4ad8f358b3445141923311e320cd80c, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1035095836249389702, guid: a4ad8f358b3445141923311e320cd80c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1160,10 +1160,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4440691066264373372, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
-      propertyPath: jumpForce
-      value: 400
-      objectReference: {fileID: 0}
     - target: {fileID: 5051516251099322008, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1174,7 +1170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6039202652471283375, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6039202652471283375, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
       propertyPath: m_LocalPosition.x
