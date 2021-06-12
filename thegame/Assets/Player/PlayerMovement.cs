@@ -95,7 +95,12 @@ public class PlayerMovement : MonoBehaviour {
 	private void UpdateMovement() {
 		lineRenderer.SetPosition(0, grabber.position);
 		rigidbody.AddForce(moveVector * moveAcceleration);
-		rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
+		// rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
+		float xVel = Mathf.Clamp(rigidbody.velocity.x, -moveSpeed, moveSpeed);
+		if(moveVector.magnitude < Mathf.Epsilon){
+			xVel = Mathf.Lerp(rigidbody.velocity.x, 0f, Time.deltaTime * moveAcceleration);
+		}
+		rigidbody.velocity = new Vector2(xVel, rigidbody.velocity.y);
 	}
 
 	private void OnMovement(InputValue value) {
