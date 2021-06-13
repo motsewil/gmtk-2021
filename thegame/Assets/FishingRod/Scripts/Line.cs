@@ -6,7 +6,7 @@ using UnityEngine;
 /// Code from Jason Yang
 /// https://github.com/dci05049/Verlet-Rope-Unity
 /// </summary>
-public class Line : MonoBehaviour
+public class Line : MonoBehaviour, IActivatable
 {
 	[SerializeField] private LineSegment lineSegmentPrefab;
 	[SerializeField] private Transform segmentParent;
@@ -47,8 +47,16 @@ public class Line : MonoBehaviour
 		this.DrawRope();
 	}
 
+	public void Activate() {
+		// Cast(dir);
+		// TODO cast perpendicular to the parent line somehow ___|__
+	}
+
 	// Send line out
 	public void Cast(Vector2 dir) {
+		foreach (LineSegment seg in LineSegments) {
+			seg.Slot.Activate();
+		}
 		isReeled = false;
 		hook.AddForce(dir * castForce);
 	}
