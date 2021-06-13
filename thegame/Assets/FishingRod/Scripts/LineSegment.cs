@@ -18,9 +18,8 @@ public class LineSegment : MonoBehaviour {
 		}
 	}
 
-	protected PowerUpPickup slot;
-	public PowerUpPickup Slot { get {return slot; } }
-	protected Vector2 slotPos;
+	protected Dictionary<PowerUpPickup, Vector2> slot = new Dictionary<PowerUpPickup, Vector2>();
+	public Dictionary<PowerUpPickup, Vector2> Slot { get {return slot; } }
 
 	private void Reset() {
 		collider = GetComponent<CircleCollider2D>();
@@ -33,17 +32,25 @@ public class LineSegment : MonoBehaviour {
 	}
 
 	protected void Update() {
-		if (slot) {
-			slot.transform.localPosition = slotPos;
+		foreach (var s in slot.Keys)
+		{
+			if (s) {
+				s.transform.localPosition = slot[s];
+			}
 		}
 	}
 
 	public void ClearSlot() {
-		if (slot) {
-			GameManager.Instance.score -= slot.score;
-			slot.transform.parent = null;
+		if (slot.Count > 0) {
+			foreach (var s in slot.Keys)
+			{
+				if (s) {
+					GameManager.Instance.score -= s.score;
+					Destroy(s.gameObject);
+				}
+			}
 		}
-		slot = null;
+		slot.Clear();
 	}
 
 	protected void OnTriggerEnter2D(Collider2D other) {
@@ -57,11 +64,10 @@ public class LineSegment : MonoBehaviour {
 			if (item.isBomb) {
 				item.Explode();
 				ClearSlot();
-			} else if (slot == null && item.transform.parent == null) { // item is not attached already
+			} else if (item.transform.parent == null) { // item is not attached already
 				GameManager.Instance.score += item.score;
-				slot = item;
 				item.transform.parent = transform;
-				slotPos = slot.transform.localPosition;
+				slot.Add(item, item.transform.localPosition);
 				item.EnableGathering();
 			}
 		}
