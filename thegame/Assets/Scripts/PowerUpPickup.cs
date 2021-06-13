@@ -4,7 +4,7 @@ using NaughtyAttributes;
 using UnityEngine;
 
 public class PowerUpPickup : MonoBehaviour {
-	public PowerUp powerup;
-
-	
+	public Power powerup;
+	public bool playOneShot = true;
+	// TODO sfx & vfx
 }

@@ -152,8 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408928fd36ce5fb45be3518a55044347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 756202356}
   started: 0
+  ended: 0
   OnStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -214,6 +215,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4493845832161679672, guid: 7098dd5f7ee4f2548b9628919451fce0, type: 3}
+      propertyPath: m_Name
+      value: ScoreTExt
+      objectReference: {fileID: 0}
     - target: {fileID: 4493845833178166775, guid: 7098dd5f7ee4f2548b9628919451fce0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -470,6 +475,22 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &754139133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 945070606, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+  m_PrefabInstance: {fileID: 8693176811542369527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &756202356 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4493845832161679674, guid: 7098dd5f7ee4f2548b9628919451fce0, type: 3}
+  m_PrefabInstance: {fileID: 236225370}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &783532312
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,6 +533,14 @@ PrefabInstance:
       value: CameraPoint (3)
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: spawnQty.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: spawnQty.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: data.position.x
       value: 65.1
       objectReference: {fileID: 0}
@@ -521,12 +550,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.data[0]
       value: 
-      objectReference: {fileID: 565583765643108279, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      objectReference: {fileID: 565583765643108279, guid: 995b3d2c9d77f5d40aef7da1d0ac4faa, type: 3}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.data[1]
+      value: 
+      objectReference: {fileID: 565583765643108279, guid: 8d024ad2182074847a08d496d8328f1d, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -716,6 +749,14 @@ PrefabInstance:
       value: CameraPoint (1)
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: spawnQty.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: spawnQty.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: data.position.x
       value: 31.2
       objectReference: {fileID: 0}
@@ -725,12 +766,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.data[0]
       value: 
-      objectReference: {fileID: 565583765643108279, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      objectReference: {fileID: 565583765643108279, guid: 995b3d2c9d77f5d40aef7da1d0ac4faa, type: 3}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.data[1]
+      value: 
+      objectReference: {fileID: 565583765643108279, guid: 8d024ad2182074847a08d496d8328f1d, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -794,6 +839,14 @@ PrefabInstance:
       value: CameraPoint (2)
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: spawnQty.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: spawnQty.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: data.position.x
       value: 38.1
       objectReference: {fileID: 0}
@@ -803,12 +856,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.data[0]
       value: 
-      objectReference: {fileID: 565583765643108279, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      objectReference: {fileID: 565583765643108279, guid: 995b3d2c9d77f5d40aef7da1d0ac4faa, type: 3}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.data[1]
+      value: 
+      objectReference: {fileID: 565583765643108279, guid: 8d024ad2182074847a08d496d8328f1d, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -931,6 +988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: []
   target: {fileID: 1551476191}
+  spriteTarget: {fileID: 754139133}
   moveSpeed: 10
   line: {fileID: 2042879167}
 --- !u!4 &2042879166
@@ -1093,16 +1151,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.x
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.y
-      value: 60
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.data[0]
+      value: 
+      objectReference: {fileID: 565583765643108279, guid: 995b3d2c9d77f5d40aef7da1d0ac4faa, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 0
