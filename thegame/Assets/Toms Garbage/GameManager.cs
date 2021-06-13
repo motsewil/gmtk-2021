@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
@@ -30,9 +31,14 @@ public class GameManager : MonoBehaviour {
 
 	public bool started = false;
 
+	public UnityEvent OnStarted = new UnityEvent();
+	public UnityEvent OnGameOver = new UnityEvent();
+	public UnityEvent OnRestart = new UnityEvent();
+
 	[Button]
 	public void StartGame(){
-
+		started = true;
+		OnStarted.Invoke();
 	}
 
 }
