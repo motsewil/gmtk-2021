@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
+[ExecuteAlways]
 public class CameraPoint : MonoBehaviour {
 	
 	public LevelData data;
 
-	private void OnValidate() {
+	private void Update() {
 		data.position = transform.position;
 	}
 
