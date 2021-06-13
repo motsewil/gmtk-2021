@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class LineSegment : MonoBehaviour {
 
-	[SerializeField] private new CircleCollider2D collider;
-	[SerializeField] private new Rigidbody2D rigidbody;
+	[SerializeField] protected new CircleCollider2D collider;
+	[SerializeField] protected new Rigidbody2D rigidbody;
 
 	public Vector2 posOld;
-	private Vector2 _posNow;
+	protected Vector2 _posNow;
 	public Vector2 posNow {
 		get { return _posNow; }
 		set {
@@ -18,7 +18,7 @@ public class LineSegment : MonoBehaviour {
 		}
 	}
 
-	private GameObject slot;
+	protected GameObject slot;
 	public GameObject Slot { get {return slot; } }
 
 	private void Reset() {
@@ -29,10 +29,6 @@ public class LineSegment : MonoBehaviour {
 		posOld = pos;
 		posNow = pos;
 		collider.radius = size;
-	} 
-
-	public void AddForce(Vector2 force) {
-		rigidbody.AddForce(force);
 	}
 
 	public void ClearSlot() {

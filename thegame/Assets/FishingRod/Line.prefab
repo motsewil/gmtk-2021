@@ -45,9 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineSegmentPrefab: {fileID: 8088182587175293873, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
   segmentParent: {fileID: 8784401909164647754}
-  hook: {fileID: 9168176953389726063}
+  hook: {fileID: 0}
+  castForce: 300
+  reelSpeed: 1
   distanceJoint: {fileID: 4784765548910249247}
-  maxRange: 10
   lineRenderer: {fileID: 7525939191121470307}
   ropeSegLen: 0.5
   segmentLength: 35
@@ -103,6 +104,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7249332928734754918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262482453246576705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 933b259e76fdb7e4f87a6c956b0eda46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider: {fileID: 416549324901172154}
+  rigidbody: {fileID: 1146421588176248489}
+  posOld: {x: 0, y: 0}
 --- !u!1 &8784401909164647755
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +394,8 @@ PrefabInstance:
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 1146421588176248489}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8088182587175293873, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
 --- !u!1 &7262482453246576705 stripped
 GameObject:
@@ -390,19 +407,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7767744230531261086, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
   m_PrefabInstance: {fileID: 1082297024984050398}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9168176953389726063 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8088182587175293873, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
-  m_PrefabInstance: {fileID: 1082297024984050398}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7262482453246576705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7245a4f48da615446ac3bab7836b6d05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1146421588176248489 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 66990171332506743, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
+  m_PrefabInstance: {fileID: 1082297024984050398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &416549324901172154 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 775452632789231972, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
   m_PrefabInstance: {fileID: 1082297024984050398}
   m_PrefabAsset: {fileID: 0}
