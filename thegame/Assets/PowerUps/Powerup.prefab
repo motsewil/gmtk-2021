@@ -50,8 +50,9 @@ MonoBehaviour:
   collider: {fileID: -6057521806019490479}
   rigidbody: {fileID: -1371419019372288861}
   posOld: {x: 0, y: 0}
+  animator: {fileID: -7918571168103615653}
   isBomb: 1
-  bombRadius: 2
+  bombRadius: 0.7
   score: 1
 --- !u!212 &-2823246822496640918
 SpriteRenderer:
