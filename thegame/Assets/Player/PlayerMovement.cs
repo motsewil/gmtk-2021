@@ -35,10 +35,8 @@ public class PlayerMovement : MonoBehaviour {
 		private LayerMask[] grabberLayerMasks;
 	[BoxGroup("Grabber")][SerializeField]
 		private Transform aimReticle;
-	[BoxGroup("Grabber")][Range(0, 100)][SerializeField]
-		private float grabberRange = 10f;
 	[BoxGroup("Grabber")][SerializeField]
-		private Transform grabber;
+		private Grabber grabber;
 	
 	private Vector2 aimPosition;
 
@@ -58,9 +56,9 @@ public class PlayerMovement : MonoBehaviour {
 		Vector3 position = new Vector3(aimPosition.x, aimPosition.y, -cam.transform.position.z);
 		aimReticle.position = cam.ScreenToWorldPoint(position);
 
-		Vector3 dir = aimReticle.position - grabber.position;
+		Vector3 dir = aimReticle.position - grabber.transform.position;
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-		grabber.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		grabber.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 	}
 
@@ -69,26 +67,26 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void OnFire(InputValue value) {
+		grabber.Launch();
+		// ContactFilter2D filter = new ContactFilter2D();
+		// int layerMask = 0;
+		// foreach (int m in grabberLayerMasks)
+		// {
+		// 	layerMask |= m;
+		// }
+		// filter.SetLayerMask(layerMask);
 
-		ContactFilter2D filter = new ContactFilter2D();
-		int layerMask = 0;
-		foreach (int m in grabberLayerMasks)
-		{
-			layerMask |= m;
-		}
-		filter.SetLayerMask(layerMask);
-
-		List<RaycastHit2D> results = new List<RaycastHit2D>(1);
-		Vector2 direction = aimReticle.position - grabber.position;
-		if (Physics2D.Raycast(grabber.position, direction, filter, results, grabberRange) > 0) {
-			LevelTile tile;
-			if (results[0].collider.TryGetComponent<LevelTile>(out tile)) {
-				if (tile.tags.Contains(LevelTileTags.Grabbable)) {
-					tile.GetComponent<SpriteRenderer>().material.color = Color.red;
-					tile.Yoink(grabber.position);
-				}
-			}
-		}
+		// List<RaycastHit2D> results = new List<RaycastHit2D>(1);
+		// Vector2 direction = aimReticle.position - grabber.position;
+		// if (Physics2D.Raycast(grabber.position, direction, filter, results, grabberRange) > 0) {
+		// 	LevelTile tile;
+		// 	if (results[0].collider.TryGetComponent<LevelTile>(out tile)) {
+		// 		if (tile.tags.Contains(LevelTileTags.Grabbable)) {
+		// 			tile.GetComponent<SpriteRenderer>().material.color = Color.red;
+		// 			tile.Yoink(grabber.position);
+		// 		}
+		// 	}
+		// }
 	}
 #endregion
 

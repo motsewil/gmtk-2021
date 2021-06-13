@@ -8,9 +8,9 @@ using UnityEngine;
 /// </summary>
 public class Rope : MonoBehaviour
 {
+	[SerializeField] private Transform targetPoint;
 
 	[SerializeField] private LineRenderer lineRenderer;
-	[SerializeField] private Transform targetPoint;
 	private List<RopeSegment> ropeSegments = new List<RopeSegment>();
 	[SerializeField] private float ropeSegLen = 0.25f;
 	[SerializeField] private int segmentLength = 35;
@@ -20,11 +20,9 @@ public class Rope : MonoBehaviour
 	void Start()
 	{
 		Vector3 ropeStartPoint = transform.position;
-
 		for (int i = 0; i < segmentLength; i++)
 		{
 			this.ropeSegments.Add(new RopeSegment(ropeStartPoint));
-			ropeStartPoint.y -= ropeSegLen;
 		}
 	}
 
@@ -68,7 +66,7 @@ public class Rope : MonoBehaviour
 		this.ropeSegments[0] = firstSegment;
 
 		RopeSegment endSegment = ropeSegments[ropeSegments.Count - 1];
-		endSegment.posNow = targetPoint.position; // TODO range limit
+		endSegment.posNow = targetPoint.position;
 		ropeSegments[ropeSegments.Count - 1] = endSegment;
 
 		for (int i = 0; i < this.segmentLength - 1; i++)
