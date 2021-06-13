@@ -32,6 +32,7 @@ public class PowerUpPickup : LineSegment {
 		// overlapsphere and find the poweruppickups and destroy them
 		// remove score
 		animator.SetTrigger("explode");
+		collider.enabled = false; // stop triggering!
 		LayerMask mask = LayerMask.GetMask("Pickup");
 		Collider2D[] pickups = Physics2D.OverlapCircleAll(transform.position, bombRadius, mask, -1f, 1f);
 		foreach (Collider2D p in pickups)
