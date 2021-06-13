@@ -28,4 +28,11 @@ public class GameManager : MonoBehaviour {
 	}
 	private int _score = 0;
 
+	public bool started = false;
+
+	[Button]
+	public void StartGame(){
+
+	}
+
 }

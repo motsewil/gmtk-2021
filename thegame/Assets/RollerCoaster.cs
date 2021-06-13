@@ -33,6 +33,9 @@ public class RollerCoaster : MonoBehaviour {
 	}
 
 	void Update () {
+		if(GameManager.Instance.started == false){
+			return;
+		}
 		float increment = Time.deltaTime * moveSpeed;
 		Vector2 direction = nextPoint.transform.position - curPoint.transform.position;
 		Vector2 velocity = direction.normalized * increment;
