@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945070606}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.476, y: -0.329, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 319249002}
@@ -73,7 +73,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -117,8 +117,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0.5, y: 0.3705201, z: 0}
-    m_Extent: {x: 0.5, y: 0.3705201, z: 0}
+    m_Center: {x: -0.0011976361, y: 0.098302156, z: 0}
+    m_Extent: {x: 0.50981104, y: 0.40169784, z: 0}
 --- !u!114 &945070607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,31 +134,41 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 1, y: 0, z: 1.4551915e-11}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
+    - position: {x: 0.5, y: -0.25, z: 1.4551915e-11}
+      leftTangent: {x: -0.11765493, y: -0.14449754, z: -0}
+      rightTangent: {x: 0.06331146, y: 0.07775578, z: 0}
+      mode: 1
       height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 0.5, y: 0.7410402, z: 1.4551915e-11}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
+    - position: {x: 0, y: 0.5, z: 1.4551915e-11}
+      leftTangent: {x: 0.3004626, y: 0, z: -0}
+      rightTangent: {x: -0.3004626, y: -0, z: 0}
+      mode: 1
       height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 0
       m_CornerMode: 0
-    - position: {x: 0, y: 0, z: 1.4551915e-11}
+    - position: {x: -0.5, y: -0.25, z: 1.4551915e-11}
+      leftTangent: {x: -0.071284175, y: 0.03789243, z: 0}
+      rightTangent: {x: 0.16453719, y: -0.087462805, z: -0}
+      mode: 1
+      height: 0.1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
+    - position: {x: 0, y: -0.2, z: 1.4551915e-11}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.1
+      height: 1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
@@ -374,8 +384,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4205158659218064260}
     - target: {fileID: 2247329130205570058, guid: 7bb42aa249c64044a881fe6208da15d8, type: 3}
+      propertyPath: lineWidth
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2247329130205570058, guid: 7bb42aa249c64044a881fe6208da15d8, type: 3}
       propertyPath: reelSpeed
-      value: 50
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2247329130205570058, guid: 7bb42aa249c64044a881fe6208da15d8, type: 3}
+      propertyPath: ropeSegLen
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2247329130205570058, guid: 7bb42aa249c64044a881fe6208da15d8, type: 3}
       propertyPath: segmentLength
