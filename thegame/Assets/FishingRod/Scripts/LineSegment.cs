@@ -36,6 +36,9 @@ public class LineSegment : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
+		if (!GameManager.Instance.started) {
+			return;
+		}
 		// if other is valid collectable add it to this
 		PowerUpPickup item = other.GetComponent<PowerUpPickup>();
 		if (item != null) {
