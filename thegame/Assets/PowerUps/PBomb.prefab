@@ -7,17 +7,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6057521806019490479, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057521806019490479, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: -2823246822496640918, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d3966e71cb13724f8c274e1e119eea6, type: 3}
     - target: {fileID: -2823246822496640918, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.10849059
       objectReference: {fileID: 0}
     - target: {fileID: -2823246822496640918, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.10849059
       objectReference: {fileID: 0}
     - target: {fileID: -2823246822496640918, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: m_Color.r
-      value: 0.4056604
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 565583765643108273, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: powerup.effect
