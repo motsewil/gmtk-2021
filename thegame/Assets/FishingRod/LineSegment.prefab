@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 775452632789231972}
+  rigidbody: {fileID: 66990171332506743}
   posOld: {x: 0, y: 0}
 --- !u!50 &66990171332506743
 Rigidbody2D:
@@ -78,7 +79,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

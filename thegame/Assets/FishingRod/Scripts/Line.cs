@@ -10,7 +10,8 @@ public class Line : MonoBehaviour
 {
 	[SerializeField] private LineSegment lineSegmentPrefab;
 	[SerializeField] private Transform segmentParent;
-	[SerializeField] private Transform targetPoint;
+	[SerializeField] private LineSegment hook;
+	public LineSegment Hook { get { return hook; } }
 
 	[SerializeField] private LineRenderer lineRenderer;
 	private List<LineSegment> LineSegments = new List<LineSegment>();
@@ -22,11 +23,12 @@ public class Line : MonoBehaviour
 	void Start()
 	{
 		Vector3 ropeStartPoint = transform.position;
-		for (int i = 0; i < segmentLength; i++)
+		for (int i = 0; i < segmentLength - 1; i++)
 		{
 			this.LineSegments.Add(Instantiate<LineSegment>(lineSegmentPrefab, segmentParent));
 			this.LineSegments[i].Init(ropeStartPoint, lineWidth / 2);
 		}
+		hook.Init(ropeStartPoint, lineWidth / 2);
 	}
 
 	// Update is called once per frame
@@ -45,7 +47,7 @@ public class Line : MonoBehaviour
 		// SIMULATION
 		Vector2 forceGravity = new Vector2(0f, -1.5f); // TODO expose grav?
 
-		for (int i = 1; i < this.segmentLength; i++)
+		for (int i = 1; i < LineSegments.Count; i++)
 		{
 			LineSegment firstSegment = this.LineSegments[i];
 			Vector2 velocity = firstSegment.posNow - firstSegment.posOld;
@@ -69,10 +71,12 @@ public class Line : MonoBehaviour
 		this.LineSegments[0] = firstSegment;
 
 		LineSegment endSegment = LineSegments[LineSegments.Count - 1];
-		endSegment.posNow = targetPoint.position;
+		endSegment.posNow = hook.transform.position;
 		LineSegments[LineSegments.Count - 1] = endSegment;
 
-		for (int i = 0; i < this.segmentLength - 1; i++)
+		// TODO limit hook position as dist from first segment
+
+		for (int i = 0; i < LineSegments.Count - 1; i++)
 		{
 			LineSegment firstSeg = this.LineSegments[i];
 			LineSegment secondSeg = this.LineSegments[i + 1];
@@ -111,8 +115,8 @@ public class Line : MonoBehaviour
 		lineRenderer.startWidth = lineWidth;
 		lineRenderer.endWidth = lineWidth;
 
-		Vector3[] ropePositions = new Vector3[this.segmentLength];
-		for (int i = 0; i < this.segmentLength; i++)
+		Vector3[] ropePositions = new Vector3[LineSegments.Count];
+		for (int i = 0; i < ropePositions.Length; i++)
 		{
 			ropePositions[i] = this.LineSegments[i].posNow;
 		}

@@ -6,6 +6,7 @@ using UnityEngine;
 public class LineSegment : MonoBehaviour {
 
 	[SerializeField] private new CircleCollider2D collider;
+	[SerializeField] private new Rigidbody2D rigidbody;
 
 	public Vector2 posOld;
 	private Vector2 _posNow;
@@ -29,6 +30,10 @@ public class LineSegment : MonoBehaviour {
 		posNow = pos;
 		collider.radius = size;
 	} 
+
+	public void AddForce(Vector2 force) {
+		rigidbody.AddForce(force);
+	}
 
 	public void ClearSlot() {
 		this.slot = null;
