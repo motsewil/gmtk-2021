@@ -1859,7 +1859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2042879165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,6 +2251,18 @@ PrefabInstance:
     - target: {fileID: 1891539985961291001, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751695120902217704, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: lineWidth
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751695120902217704, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: reelSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751695120902217704, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: ropeSegLen
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
