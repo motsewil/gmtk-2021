@@ -16,7 +16,7 @@ filters = {
 	settings = true
 }
 scopes = {
-	"last_search.AB59B443" = "camerapoint"
+	"last_search.AB59B443" = "scene"
 }
 providers = {
 	asset = {

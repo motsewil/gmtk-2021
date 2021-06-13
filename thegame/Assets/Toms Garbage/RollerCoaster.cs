@@ -41,7 +41,7 @@ public class RollerCoaster : MonoBehaviour {
 		Vector2 direction = nextPoint.transform.position - curPoint.transform.position;
 		Vector2 velocity = direction.normalized * increment;
 		target.transform.position += (Vector3) velocity;
-		if (Vector3.Distance (target.transform.position, nextPoint.transform.position) < 0.05f) {
+		if (Vector3.Distance (target.transform.position, nextPoint.transform.position) < 0.1f) {
 			curPoint = nextPoint;
 			index++;
 			if (index < points.Count) {

@@ -18,14 +18,16 @@ public class GameManager : MonoBehaviour {
 	}
 	private static GameManager _instance;
 
-	[SerializeField]private TMP_Text scoreText;
+	[SerializeField]private TMP_Text scoreText1;
+	[SerializeField]private TMP_Text scoreText2;
 	public int score {
 		get {
 			return _score;
 		}
 		set {
 			_score = value;
-			scoreText.text = _score.ToString();
+			scoreText1.text = _score.ToString();
+			scoreText2.text = _score.ToString();
 		}
 	}
 	private int _score = 0;
