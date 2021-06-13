@@ -32,6 +32,7 @@ public class LineSegment : MonoBehaviour {
 	} 
 
 	public void AddForce(Vector2 force) {
+		rigidbody.velocity = Vector2.zero;
 		rigidbody.AddForce(force);
 	}
 
