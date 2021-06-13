@@ -18,6 +18,10 @@ public class Rod : MonoBehaviour {
 	}
 
 	public void OnFire() {
+		if(!GameManager.Instance.started){
+			GameManager.Instance.StartGame();
+			return;
+		}
 		if (line.IsReeled) {
 			Vector2 dir = (reticle.position - transform.position).normalized;
 			line.Cast(dir);

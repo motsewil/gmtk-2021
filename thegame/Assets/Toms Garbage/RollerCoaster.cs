@@ -13,6 +13,7 @@ public class RollerCoaster : MonoBehaviour {
 
 	public List<Transform> points;
 	public GameObject target;
+	public GameObject spriteTarget;
 
 	Transform curPoint;
 	Transform nextPoint;
@@ -47,7 +48,7 @@ public class RollerCoaster : MonoBehaviour {
 				nextPoint = points[index];
 			}
 		}
-		target.transform.up =  Util.RoundToDegrees(velocity, 1f);
+		spriteTarget.transform.up =  Util.RoundToDegrees(velocity, 1f);
 		if (line == null) {
 			line = GetComponent<LineRenderer> ();
 		}
