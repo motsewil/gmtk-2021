@@ -7,17 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -2823246822496640918, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
-      propertyPath: m_Color.b
-      value: 0
+    - target: {fileID: 565583765643108273, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      propertyPath: score
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: -2823246822496640918, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
-      propertyPath: m_Color.g
+    - target: {fileID: 565583765643108273, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      propertyPath: isBomb
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -2823246822496640918, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
-      propertyPath: m_Color.r
-      value: 0.4056604
       objectReference: {fileID: 0}
     - target: {fileID: 565583765643108273, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: powerup.effect
@@ -25,11 +21,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 565583765643108273, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: powerup.strength
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 565583765643108278, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 565583765643108278, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 565583765643108278, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 565583765643108278, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 565583765643108279, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
       propertyPath: m_Name
-      value: PBomb
+      value: PCoin5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}

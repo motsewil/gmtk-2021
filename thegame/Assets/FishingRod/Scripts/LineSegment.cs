@@ -20,6 +20,7 @@ public class LineSegment : MonoBehaviour {
 
 	protected PowerUpPickup slot;
 	public PowerUpPickup Slot { get {return slot; } }
+	protected Vector2 slotPos;
 
 	private void Reset() {
 		collider = GetComponent<CircleCollider2D>();
@@ -31,22 +32,37 @@ public class LineSegment : MonoBehaviour {
 		collider.radius = size;
 	}
 
-	public void ClearSlot() {
-		this.slot = null;
+	protected void Update() {
+		if (slot) {
+			slot.transform.localPosition = slotPos;
+		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D other) {
+	public void ClearSlot() {
+		if (slot) {
+			GameManager.Instance.score -= slot.score;
+		}
+		slot.transform.parent = null;
+		slot = null;
+	}
+
+	protected void OnTriggerEnter2D(Collider2D other) {
 		if (!GameManager.Instance.started) {
 			return;
 		}
+
 		// if other is valid collectable add it to this
 		PowerUpPickup item = other.GetComponent<PowerUpPickup>();
 		if (item != null) {
-			if (item.playOneShot) {
-				Destroy(item.gameObject);
-				GameManager.Instance.ResolvePowerUp(item.powerup);
-			} else {
+			if (item.isBomb) {
+				item.Explode();
+				ClearSlot();
+			} else if (slot == null && item.transform.parent == null) { // item is not attached already
+				GameManager.Instance.score += item.score;
 				slot = item;
+				item.transform.parent = transform;
+				slotPos = slot.transform.localPosition;
+				item.EnableGathering();
 			}
 		}
 		// Fire onCatch event to the other, ie. if bomb it'll blow up and remove some segments

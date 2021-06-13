@@ -54,13 +54,4 @@ public class GameManager : MonoBehaviour {
 	public void Restart(){
 		UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 	}
-
-	public void ResolvePowerUp(Power power) {
-		switch(power.effect) {
-			case "coin":
-				score += (int)power.strength;
-				break;
-			// TODO bombs here too?
-		}
-	}
 }
