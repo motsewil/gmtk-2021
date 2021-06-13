@@ -8,116 +8,71 @@ public class LevelTile : MonoBehaviour {
 
 	public List<LevelTileTags> tags;
 	public LevelTileType type;
-
-	[SerializeField] private float yoinkSpeed = 5f;
-	[SerializeField] private new Rigidbody2D rigidbody;
-
-	[SerializeField]
-	private List<AdjacentSprites> adjacentSprites;
-	[SerializeField]
-	private Sprite defaultSprite;
-	
-	private List<LevelTile> neighbors = new List<LevelTile>();
-
-	private void Reset() {
-		if (tags.Contains(LevelTileTags.Grabbable)) {
-			if (rigidbody == null) {
-				
-				TryGetComponent<Rigidbody2D>(out rigidbody);
-			}
+	private new Rigidbody2D rigidbody {
+		get {
+			if(_rigidbody == null){ TryGetComponent<Rigidbody2D>(out _rigidbody); }
+			return _rigidbody;
 		}
 	}
-
-	private void Awake(){
-		group = new List<LevelTile>();
-		group.Add(this);
-		ResetNeighbours();
-	}
-
-	private void ResetNeighbours(){
-		RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 1f, transform.up);
-		neighbors = new List<LevelTile>();
-		for(int i = 0; i < hits.Length; i++){
-			RaycastHit2D hit = hits[i];
-			LevelTile tile = hit.transform.GetComponent<LevelTile>();
-			if(tile){
-				neighbors.Add(tile);
-			}
+	private Rigidbody2D _rigidbody;
+	private new BoxCollider2D collider {
+		get {
+			if(_collider == null){ TryGetComponent<BoxCollider2D>(out _collider); }
+			return _collider;
 		}
 	}
+	private BoxCollider2D _collider;
+	[SerializeField]private List<AdjacentSprites> adjacentSprites;
+	[SerializeField]private Sprite defaultSprite;
+	[SerializeField]private float yoinkSpeed;
+	[SerializeField]private float smoothSpeed = 5f;
 
-	public Vector2 yoinkOrigin = Vector2.negativeInfinity;
-	public void Yoink(Vector2 origin) {
-
-		foreach(LevelTile tile in group){
-			Vector3 offset = tile.transform.position - transform.position;
-			if (tile.rigidbody) {
-				tile.yoinkOrigin = origin + (Vector2)offset;
-				tile.rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-			}
+	private Vector2 velocity;
+	private Vector2 hitOffset;
+	private Vector2 hitPoint { 
+		get { 
+			return (Vector2)transform.position + hitOffset;
 		}
+	}
+	private Vector2 targetPosWhenStill = Vector2.negativeInfinity;
+
+	public void Yoink(Vector2 origin, Vector2 hitPoint) {
+		hitOffset = hitPoint - (Vector2)transform.position;
+		Vector2 pullDir = (origin - hitPoint).normalized;
+		rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+		velocity = pullDir * yoinkSpeed;
 		// TODO add juice event!
 	}
 
-
-	private void Update(){
-		if(!float.IsInfinity(yoinkOrigin.magnitude) && rigidbody){
-			rigidbody.velocity = (yoinkOrigin - (Vector2)transform.position).normalized * yoinkSpeed;
-		}
-		if(rigidbody && rigidbody.velocity.magnitude < Mathf.Epsilon && !float.IsInfinity(gridPos.magnitude)){
-			transform.localPosition = Vector3.Lerp(transform.localPosition, gridPos, Time.deltaTime * gridSmooth);
+	private void Update() {
+		if(!rigidbody){
+			return;
 		}
 
-	}
-
-	public Vector3 gridPos = Vector3.negativeInfinity;
-	[SerializeField]
-	private float gridSmooth = 10f;
-	private List<LevelTile> group;
-	private void OnCollisionEnter2D(Collision2D other) {
-		LevelTile tile = other.gameObject.GetComponent<LevelTile>();
-		if(tile && !neighbors.Contains(tile) && !group.Contains(tile)){
-			if(!float.IsInfinity(yoinkOrigin.magnitude)){
-				foreach(LevelTile gTile in group){
-					// Vector3 offset = (transform.position - gTile.transform.position); 
-					gTile.gridPos = new Vector3(
-						Mathf.Floor(gTile.transform.localPosition.x) + 0.5f,
-						Mathf.Floor(gTile.transform.localPosition.y) + 0.5f,
-						gTile.transform.localPosition.z
-					);
-					// gTile.gridPos += offset;
-				}
-			}
-			if(tile.tags.Contains(LevelTileTags.Grabbable) && tile.rigidbody){
-				AddToGroup(tile);
-			}
-
-			foreach(LevelTile gTile in group){
-				if(gTile.rigidbody){
-					gTile.yoinkOrigin = Vector2.negativeInfinity;
-					gTile.rigidbody.velocity = Vector2.zero;
-					gTile.rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-					gTile.ResetNeighbours();
+		if(rigidbody.velocity.magnitude > Mathf.Epsilon){
+			RaycastHit2D hit = Physics2D.Raycast(hitPoint + velocity.normalized * 0.01f, velocity.normalized, 0.05f);
+			if(hit){
+				LevelTile tile = hit.transform.GetComponent<LevelTile>();
+				if(tile){
+					velocity = Vector2.zero;
+					rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+					targetPosWhenStill = tile.transform.position + Vector3.up;
 				}
 			}
 		}
+		if(velocity.magnitude < Mathf.Epsilon && !float.IsInfinity(targetPosWhenStill.magnitude)){
+			transform.position = Vector3.Lerp(transform.position, targetPosWhenStill, Time.deltaTime * smoothSpeed);
+		}
+		rigidbody.velocity = velocity;
 	}
 
-	public void AddToGroup(LevelTile tile){
-		if(group == null){
-			group = new List<LevelTile>();
-			group.Add(this);
-		}
-		group.Add(tile);
-		foreach(LevelTile t in group){
-			if(t != this){
-				t.group.Add(this);
-				t.GetComponent<SpriteRenderer>().color = Color.magenta;
-			}
+
+	private void OnDrawGizmos() {
+		if(rigidbody){
+			// Gizmos.DrawLine(transform.position, (Vector2)transform.position + rigidbody.velocity.normalized);
 		}
 	}
 
-	[Button]
 	public void PopulateAdjacencies () {
 		LevelTileAdjacency adjacency;
 		adjacency = LevelTileAdjacency.None;
