@@ -6,6 +6,7 @@ using UnityEngine;
 public class PowerUpPickup : LineSegment {
 
 	[SerializeField] private Animator animator;
+	[SerializeField] private AudioSource audioSource;
 	public bool isBomb = true;
 	[ShowIf("isBomb")][SerializeField] private float bombRadius = 0.5f;
 	public int score = 1;
@@ -16,6 +17,7 @@ public class PowerUpPickup : LineSegment {
 
 	// TODO sfx & vfx
 	public void Explode() {
+		audioSource.Play();
 		// overlapsphere and find the poweruppickups and destroy them
 		// remove score
 		animator.SetTrigger("explode");
@@ -36,6 +38,7 @@ public class PowerUpPickup : LineSegment {
 	}
 
 	public void EnableGathering() {
+		audioSource.Play();
 		collider.isTrigger = true;
 	}
 

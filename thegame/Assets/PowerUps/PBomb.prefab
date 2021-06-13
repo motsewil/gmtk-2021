@@ -87,5 +87,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: PBomb
       objectReference: {fileID: 0}
+    - target: {fileID: 2147353428519835495, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a2ae38fa6629144fac7495a2074cfad, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
