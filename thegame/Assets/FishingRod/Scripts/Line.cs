@@ -55,7 +55,7 @@ public class Line : MonoBehaviour, IActivatable
 	// Send line out
 	public void Cast(Vector2 dir) {
 		foreach (LineSegment seg in LineSegments) {
-			seg.Slot.Activate();
+			seg?.Slot?.Activate(); // TODO this does nothing
 		}
 		isReeled = false;
 		hook.AddForce(dir * castForce);
