@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	[BoxGroup("Components")][SerializeField]
 		private new Rigidbody2D rigidbody;
-	[BoxGroup("Components")][SerializeField]
-		private LineRenderer lineRenderer;
 
 	[BoxGroup("Movement")][Min(0)][SerializeField]
 		private float jumpForce = 200f;
@@ -46,7 +44,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void Reset() {
 		rigidbody = GetComponent<Rigidbody2D>();
-		lineRenderer = GetComponent<LineRenderer>();
 	}
 
 	private void Update() {
@@ -60,7 +57,6 @@ public class PlayerMovement : MonoBehaviour {
 		Camera cam = CameraController.Main;
 		Vector3 position = new Vector3(aimPosition.x, aimPosition.y, -cam.transform.position.z);
 		aimReticle.position = cam.ScreenToWorldPoint(position);
-		lineRenderer.SetPosition(lineRenderer.positionCount - 1, aimReticle.position);
 
 		Vector3 dir = aimReticle.position - grabber.position;
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -98,7 +94,6 @@ public class PlayerMovement : MonoBehaviour {
 
 #region Movement
 	private void UpdateMovement() {
-		lineRenderer.SetPosition(0, grabber.position);
 		rigidbody.AddForce(moveVector * moveAcceleration);
 		// rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, moveSpeed);
 		float xVel = Mathf.Clamp(rigidbody.velocity.x, -moveSpeed, moveSpeed);
