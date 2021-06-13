@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7767744230531261086}
   - component: {fileID: 8088182587175293873}
-  - component: {fileID: 2278052468191817453}
+  - component: {fileID: 66990171332506743}
+  - component: {fileID: 775452632789231972}
   m_Layer: 0
   m_Name: LineSegment
   m_TagString: Untagged
@@ -44,8 +45,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7245a4f48da615446ac3bab7836b6d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!70 &2278052468191817453
-CapsuleCollider2D:
+  collider: {fileID: 775452632789231972}
+  rigidbody: {fileID: 66990171332506743}
+  posOld: {x: 0, y: 0}
+--- !u!50 &66990171332506743
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7767744230531261087}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &775452632789231972
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -58,5 +83,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 0.5
