@@ -1050,7 +1050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.x
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.y
@@ -1542,7 +1542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.x
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.y
@@ -1971,7 +1971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.x
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.y
@@ -2312,7 +2312,7 @@ MonoBehaviour:
   points: []
   target: {fileID: 1551476191}
   spriteTarget: {fileID: 754139133}
-  moveSpeed: 1
+  moveSpeed: 2
   line: {fileID: 2042879167}
 --- !u!4 &2042879166
 Transform:
@@ -2565,11 +2565,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.x
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: spawnQty.y
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.size
@@ -2684,6 +2684,34 @@ PrefabInstance:
     - target: {fileID: 1891539985961291001, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940919842003179649, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940919842003179649, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940919842003179649, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940919842003179649, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940919842003179649, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940919842003179649, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751695120902217704, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
+      propertyPath: segmentLength
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e60275f3a35e7c4daeb374458e5fc55, type: 3}
