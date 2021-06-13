@@ -6,14 +6,9 @@ using UnityEngine.InputSystem;
 
 public class Rod : MonoBehaviour {
 
-	/**
-	SHoot ALL the hooks in some direction
-	Recall ALL the hooks back to the rod
-	*/
-
 	[SerializeField] private Transform reticle;
-	[SerializeField] private Line baseline;
-	[SerializeField] private float yeetForce = 100f;
+	[SerializeField] private Line line;
+	
 	private Vector2 mousePosition;
 
 	private void Update() {
@@ -23,8 +18,14 @@ public class Rod : MonoBehaviour {
 	}
 
 	public void OnFire() {
-		Vector2 dir = (reticle.position - transform.position).normalized;
-		baseline.Hook.AddForce(dir * yeetForce);
+		if (line.IsReeled) {
+			Vector2 dir = (reticle.position - transform.position).normalized;
+			line.Cast(dir);
+		}
+	}
+
+	public void OnYoink() {
+		line.Reel();
 	}
 
 	private void OnAim(InputValue value) {

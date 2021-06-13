@@ -10,16 +10,21 @@ public class Line : MonoBehaviour
 {
 	[SerializeField] private LineSegment lineSegmentPrefab;
 	[SerializeField] private Transform segmentParent;
-	[SerializeField] private LineSegment hook;
-	public LineSegment Hook { get { return hook; } }
+	[SerializeField] private HookSegment hook;
+	public HookSegment Hook { get { return hook; } }
+
+	[SerializeField] private float castForce = 300f;
+	[SerializeField] private float reelSpeed = 1f;
 
 	[SerializeField] private DistanceJoint2D distanceJoint;
-	[Min(0f)][SerializeField] private float maxRange = 10f;
 	[SerializeField] private LineRenderer lineRenderer;
 	private List<LineSegment> LineSegments = new List<LineSegment>();
 	[SerializeField] private float ropeSegLen = 0.25f;
 	[SerializeField] private int segmentLength = 35;
 	[SerializeField] private float lineWidth = 0.1f;
+
+	private bool isReeled;
+	public bool IsReeled { get { return isReeled; } }
 
 	// Use this for initialization
 	void Start()
@@ -32,6 +37,8 @@ public class Line : MonoBehaviour
 			this.LineSegments[i].Init(ropeStartPoint, lineWidth / 2);
 		}
 		hook.Init(ropeStartPoint, lineWidth / 2);
+		hook.OnReelComplete += OnReel;
+		isReeled = true;
 	}
 
 	// Update is called once per frame
@@ -40,11 +47,30 @@ public class Line : MonoBehaviour
 		this.DrawRope();
 	}
 
+	// Send line out
+	public void Cast(Vector2 dir) {
+		isReeled = false;
+		hook.AddForce(dir * castForce);
+	}
+
+	// Pull line in
+	public void Reel() {
+		if (!isReeled) {
+			hook.Reel(transform.position, reelSpeed);
+		}
+	}
+
+	private void OnReel() {
+		isReeled = true;
+	}
+
 	private void FixedUpdate()
 	{
 		this.Simulate();
 	}
 
+
+#region Line rendering & stuff
 	private void Simulate()
 	{
 		// SIMULATION
@@ -127,4 +153,5 @@ public class Line : MonoBehaviour
 		lineRenderer.positionCount = ropePositions.Length;
 		lineRenderer.SetPositions(ropePositions);
 	}
+#endregion
 }
