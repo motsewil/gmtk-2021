@@ -386,6 +386,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraPoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: data.position.x
+      value: 65.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: data.position.y
+      value: 20.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.data[0]
+      value: 
+      objectReference: {fileID: 7488172273056268537, guid: 4354a97cb2d5ed54483c2d15d15bcff2, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -718,6 +734,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraPoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: data.position.x
+      value: 31.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: data.position.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.data[0]
+      value: 
+      objectReference: {fileID: 7488172273056268537, guid: 4354a97cb2d5ed54483c2d15d15bcff2, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -775,6 +807,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraPoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: data.position.x
+      value: 38.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: data.position.y
+      value: 17.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: potentialPowerups.Array.data[0]
+      value: 
+      objectReference: {fileID: 7488172273056268537, guid: 4354a97cb2d5ed54483c2d15d15bcff2, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 8

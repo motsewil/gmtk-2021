@@ -8,6 +8,22 @@ public class CameraPoint : MonoBehaviour {
 	
 	public LevelData data;
 
+	[SerializeField]List<GameObject> potentialPowerups;
+
+	private void Awake() {
+		SpawnStuff();
+	}
+
+	private void SpawnStuff(){
+		// Powerups
+		for(int i = 0; i < Mathf.FloorToInt(Random.Range(20, 60)); i++){
+			Vector3 position = data.RandomPointInBounds();
+			int index = Mathf.FloorToInt(Random.Range(0f, potentialPowerups.Count - 0.1f));
+			GameObject pickup = Instantiate(potentialPowerups[index], position, Quaternion.identity);
+		}
+
+	}
+
 	private void Update() {
 		data.position = transform.position;
 	}
@@ -110,5 +126,12 @@ public struct LevelData {
 			}
 		}
 		return closest;
+	}
+
+	public Vector3 RandomPointInBounds(){
+		Vector2 pos = bounds.center - bounds.extents;
+		pos.x += Random.Range(1f, bounds.size.x - 1f);
+		pos.y += Random.Range(1f, bounds.size.y - 1f);
+		return (Vector3)pos;
 	}
 }
