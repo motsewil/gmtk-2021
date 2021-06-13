@@ -41,8 +41,8 @@ public class LineSegment : MonoBehaviour {
 	public void ClearSlot() {
 		if (slot) {
 			GameManager.Instance.score -= slot.score;
+			slot.transform.parent = null;
 		}
-		slot.transform.parent = null;
 		slot = null;
 	}
 

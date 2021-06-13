@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1371419019372288861}
   - component: {fileID: -6057521806019490479}
   - component: {fileID: -7918571168103615653}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Powerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   rigidbody: {fileID: -1371419019372288861}
   posOld: {x: 0, y: 0}
   isBomb: 1
+  bombRadius: 2
   score: 1
 --- !u!212 &-2823246822496640918
 SpriteRenderer:
