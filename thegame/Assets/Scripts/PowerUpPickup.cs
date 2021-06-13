@@ -5,4 +5,6 @@ using UnityEngine;
 
 public class PowerUpPickup : MonoBehaviour {
 	public PowerUp powerup;
+
+	
 }

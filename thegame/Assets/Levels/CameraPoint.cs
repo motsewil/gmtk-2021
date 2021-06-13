@@ -8,19 +8,23 @@ public class CameraPoint : MonoBehaviour {
 	public LevelData data;
 
 	[SerializeField]List<GameObject> potentialPowerups;
+	[MinMaxSlider(0, 100)][SerializeField] private Vector2 spawnQty = new Vector2(20, 60);
 
-	private void Awake() {
-		SpawnStuff();
+	private void Start() {
+		if (potentialPowerups != null && potentialPowerups.Count > 0) {
+			SpawnStuff();
+		}
 	}
 
 	private void SpawnStuff(){
 		// Powerups
-		for(int i = 0; i < Mathf.FloorToInt(Random.Range(20, 60)); i++){
+		for(int i = 0; i < Mathf.FloorToInt(Random.Range(spawnQty.x, spawnQty.y)); i++){
 			Vector3 position = data.RandomPointInBounds();
 			int index = Mathf.FloorToInt(Random.Range(0f, potentialPowerups.Count - 0.1f));
-			GameObject pickup = Instantiate(potentialPowerups[index], position, Quaternion.identity);
+			if (potentialPowerups[index] != null) {
+				GameObject pickup = Instantiate(potentialPowerups[index], position, Quaternion.identity);
+			}
 		}
-
 	}
 
 	private void Update() {

@@ -4,7 +4,6 @@ using UnityEngine;
 [System.Serializable]
 public struct PowerUp {
 	public List<Power> powers;
-	public Sprite sprite;
 }
 
 [System.Serializable]

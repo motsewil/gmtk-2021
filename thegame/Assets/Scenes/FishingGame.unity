@@ -526,7 +526,7 @@ PrefabInstance:
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.data[0]
       value: 
-      objectReference: {fileID: 7488172273056268537, guid: 4354a97cb2d5ed54483c2d15d15bcff2, type: 3}
+      objectReference: {fileID: 565583765643108279, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -730,7 +730,7 @@ PrefabInstance:
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.data[0]
       value: 
-      objectReference: {fileID: 7488172273056268537, guid: 4354a97cb2d5ed54483c2d15d15bcff2, type: 3}
+      objectReference: {fileID: 565583765643108279, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -808,7 +808,7 @@ PrefabInstance:
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.data[0]
       value: 
-      objectReference: {fileID: 7488172273056268537, guid: 4354a97cb2d5ed54483c2d15d15bcff2, type: 3}
+      objectReference: {fileID: 565583765643108279, guid: 734a30ea6edd80e4c88e0e983bc2110c, type: 3}
     - target: {fileID: 751695579235567343, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1090,6 +1090,14 @@ PrefabInstance:
     - target: {fileID: 751695579235567341, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: m_Name
       value: CameraPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: spawnQty.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
+      propertyPath: spawnQty.y
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 751695579235567342, guid: 188c8db1555d70b40a90205964fec15b, type: 3}
       propertyPath: potentialPowerups.Array.size
