@@ -45,7 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineSegmentPrefab: {fileID: 8088182587175293873, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
   segmentParent: {fileID: 8784401909164647754}
-  hook: {fileID: 0}
+  hook: {fileID: 9168176953389726063}
+  distanceJoint: {fileID: 4784765548910249247}
+  maxRange: 10
   lineRenderer: {fileID: 7525939191121470307}
   ropeSegLen: 0.5
   segmentLength: 35
@@ -142,6 +144,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8784401909829693460}
   - component: {fileID: 7525939191121470307}
+  - component: {fileID: 451838166667063158}
+  - component: {fileID: 4784765548910249247}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -263,6 +267,46 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!50 &451838166667063158
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8784401909829693466}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!232 &4784765548910249247
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8784401909829693466}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 1146421588176248489}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 0.005
+  m_MaxDistanceOnly: 1
 --- !u!1001 &1082297024984050398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,6 +390,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7767744230531261086, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
   m_PrefabInstance: {fileID: 1082297024984050398}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9168176953389726063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8088182587175293873, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}
+  m_PrefabInstance: {fileID: 1082297024984050398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262482453246576705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7245a4f48da615446ac3bab7836b6d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &1146421588176248489 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 66990171332506743, guid: 0631c590631f85c4287e17f28b1623a3, type: 3}

@@ -13,6 +13,8 @@ public class Line : MonoBehaviour
 	[SerializeField] private LineSegment hook;
 	public LineSegment Hook { get { return hook; } }
 
+	[SerializeField] private DistanceJoint2D distanceJoint;
+	[Min(0f)][SerializeField] private float maxRange = 10f;
 	[SerializeField] private LineRenderer lineRenderer;
 	private List<LineSegment> LineSegments = new List<LineSegment>();
 	[SerializeField] private float ropeSegLen = 0.25f;
@@ -22,6 +24,7 @@ public class Line : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		distanceJoint.distance = ropeSegLen * segmentLength;
 		Vector3 ropeStartPoint = transform.position;
 		for (int i = 0; i < segmentLength - 1; i++)
 		{

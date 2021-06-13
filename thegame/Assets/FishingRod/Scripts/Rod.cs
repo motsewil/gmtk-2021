@@ -30,8 +30,4 @@ public class Rod : MonoBehaviour {
 	private void OnAim(InputValue value) {
 		mousePosition = value.Get<Vector2>();
 	}
-
-	private void OnDrawGizmos() {
-		Gizmos.DrawSphere(mousePosition, 1f);
-	}
 }
