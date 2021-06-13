@@ -8,82 +8,71 @@ public class LevelTile : MonoBehaviour {
 
 	public List<LevelTileTags> tags;
 	public LevelTileType type;
-
-	[SerializeField] private float yoinkSpeed = 5f;
-	[SerializeField] private new Rigidbody2D rigidbody;
-
-	[SerializeField]
-	private List<AdjacentSprites> adjacentSprites;
-	[SerializeField]
-	private Sprite defaultSprite;
-	
-	private List<LevelTile> neighbors = new List<LevelTile>();
-
-	private void Reset() {
-		if (tags.Contains(LevelTileTags.Grabbable)) {
-			if (rigidbody == null) {
-				
-				TryGetComponent<Rigidbody2D>(out rigidbody);
-			}
+	private new Rigidbody2D rigidbody {
+		get {
+			if(_rigidbody == null){ TryGetComponent<Rigidbody2D>(out _rigidbody); }
+			return _rigidbody;
 		}
 	}
-
-	private void Awake(){
-		ResetNeighbours();
-	}
-
-	private void ResetNeighbours(){
-		RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 1f, transform.up);
-		neighbors = new List<LevelTile>();
-		for(int i = 0; i < hits.Length; i++){
-			RaycastHit2D hit = hits[i];
-			LevelTile tile = hit.transform.GetComponent<LevelTile>();
-			if(tile){
-				neighbors.Add(tile);
-			}
+	private Rigidbody2D _rigidbody;
+	private new BoxCollider2D collider {
+		get {
+			if(_collider == null){ TryGetComponent<BoxCollider2D>(out _collider); }
+			return _collider;
 		}
 	}
+	private BoxCollider2D _collider;
+	[SerializeField]private List<AdjacentSprites> adjacentSprites;
+	[SerializeField]private Sprite defaultSprite;
+	[SerializeField]private float yoinkSpeed;
+	[SerializeField]private float smoothSpeed = 5f;
 
-	public Vector2 yoinkOrigin = Vector2.negativeInfinity;
-	public void Yoink(Vector2 origin) {
-		if (rigidbody) {
-			yoinkOrigin = origin;
-			rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+	private Vector2 velocity;
+	private Vector2 hitOffset;
+	private Vector2 hitPoint { 
+		get { 
+			return (Vector2)transform.position + hitOffset;
 		}
+	}
+	private Vector2 targetPosWhenStill = Vector2.negativeInfinity;
+
+	public void Yoink(Vector2 origin, Vector2 hitPoint) {
+		hitOffset = hitPoint - (Vector2)transform.position;
+		Vector2 pullDir = (origin - hitPoint).normalized;
+		rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+		velocity = pullDir * yoinkSpeed;
 		// TODO add juice event!
 	}
 
-	private void Update(){
-		if(!float.IsInfinity(yoinkOrigin.magnitude)&& rigidbody){
-			rigidbody.velocity = (yoinkOrigin - (Vector2)transform.position).normalized * yoinkSpeed;
-		}
-		if(rigidbody && rigidbody.velocity.magnitude < Mathf.Epsilon && !float.IsInfinity(gridPos.magnitude)){
-			transform.localPosition = Vector3.Lerp(transform.localPosition, gridPos, Time.deltaTime * gridSmooth);
+	private void Update() {
+		if(!rigidbody){
+			return;
 		}
 
-	}
-
-	private Vector3 gridPos = Vector3.negativeInfinity;
-	[SerializeField]
-	private float gridSmooth = 10f;
-	private void OnCollisionEnter2D(Collision2D other) {
-		LevelTile tile = other.gameObject.GetComponent<LevelTile>();
-		if(tile && !neighbors.Contains(tile)){
-			if(!float.IsInfinity(yoinkOrigin.magnitude)){
-				gridPos = new Vector3(
-					Mathf.Floor(transform.localPosition.x) + 0.5f,
-					Mathf.Floor(transform.localPosition.y) + 0.5f,
-					transform.localPosition.z
-				);
+		if(rigidbody.velocity.magnitude > Mathf.Epsilon){
+			RaycastHit2D hit = Physics2D.Raycast(hitPoint + velocity.normalized * 0.01f, velocity.normalized, 0.05f);
+			if(hit){
+				LevelTile tile = hit.transform.GetComponent<LevelTile>();
+				if(tile){
+					velocity = Vector2.zero;
+					rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+					targetPosWhenStill = tile.transform.position + Vector3.up;
+				}
 			}
-			yoinkOrigin = Vector2.negativeInfinity;
-			rigidbody.velocity = Vector2.zero;
-			rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-			ResetNeighbours();
+		}
+		if(velocity.magnitude < Mathf.Epsilon && !float.IsInfinity(targetPosWhenStill.magnitude)){
+			transform.position = Vector3.Lerp(transform.position, targetPosWhenStill, Time.deltaTime * smoothSpeed);
+		}
+		rigidbody.velocity = velocity;
+	}
+
+
+	private void OnDrawGizmos() {
+		if(rigidbody){
+			// Gizmos.DrawLine(transform.position, (Vector2)transform.position + rigidbody.velocity.normalized);
 		}
 	}
 
-	[Button]
 	public void PopulateAdjacencies () {
 		LevelTileAdjacency adjacency;
 		adjacency = LevelTileAdjacency.None;
