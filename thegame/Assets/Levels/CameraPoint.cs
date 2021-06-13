@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
-[ExecuteAlways]
 public class CameraPoint : MonoBehaviour {
 	
 	public LevelData data;
