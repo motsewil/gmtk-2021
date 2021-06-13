@@ -29,6 +29,8 @@ public class LevelTile : MonoBehaviour {
 	}
 
 	private void Awake(){
+		group = new List<LevelTile>();
+		group.Add(this);
 		ResetNeighbours();
 	}
 
@@ -46,15 +48,20 @@ public class LevelTile : MonoBehaviour {
 
 	public Vector2 yoinkOrigin = Vector2.negativeInfinity;
 	public void Yoink(Vector2 origin) {
-		if (rigidbody) {
-			yoinkOrigin = origin;
-			rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+		foreach(LevelTile tile in group){
+			Vector3 offset = tile.transform.position - transform.position;
+			if (tile.rigidbody) {
+				tile.yoinkOrigin = origin + (Vector2)offset;
+				tile.rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+			}
 		}
 		// TODO add juice event!
 	}
 
+
 	private void Update(){
-		if(!float.IsInfinity(yoinkOrigin.magnitude)&& rigidbody){
+		if(!float.IsInfinity(yoinkOrigin.magnitude) && rigidbody){
 			rigidbody.velocity = (yoinkOrigin - (Vector2)transform.position).normalized * yoinkSpeed;
 		}
 		if(rigidbody && rigidbody.velocity.magnitude < Mathf.Epsilon && !float.IsInfinity(gridPos.magnitude)){
@@ -63,23 +70,50 @@ public class LevelTile : MonoBehaviour {
 
 	}
 
-	private Vector3 gridPos = Vector3.negativeInfinity;
+	public Vector3 gridPos = Vector3.negativeInfinity;
 	[SerializeField]
 	private float gridSmooth = 10f;
+	private List<LevelTile> group;
 	private void OnCollisionEnter2D(Collision2D other) {
 		LevelTile tile = other.gameObject.GetComponent<LevelTile>();
-		if(tile && !neighbors.Contains(tile)){
+		if(tile && !neighbors.Contains(tile) && !group.Contains(tile)){
 			if(!float.IsInfinity(yoinkOrigin.magnitude)){
-				gridPos = new Vector3(
-					Mathf.Floor(transform.localPosition.x) + 0.5f,
-					Mathf.Floor(transform.localPosition.y) + 0.5f,
-					transform.localPosition.z
-				);
+				foreach(LevelTile gTile in group){
+					// Vector3 offset = (transform.position - gTile.transform.position); 
+					gTile.gridPos = new Vector3(
+						Mathf.Floor(gTile.transform.localPosition.x) + 0.5f,
+						Mathf.Floor(gTile.transform.localPosition.y) + 0.5f,
+						gTile.transform.localPosition.z
+					);
+					// gTile.gridPos += offset;
+				}
 			}
-			yoinkOrigin = Vector2.negativeInfinity;
-			rigidbody.velocity = Vector2.zero;
-			rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-			ResetNeighbours();
+			if(tile.tags.Contains(LevelTileTags.Grabbable) && tile.rigidbody){
+				AddToGroup(tile);
+			}
+
+			foreach(LevelTile gTile in group){
+				if(gTile.rigidbody){
+					gTile.yoinkOrigin = Vector2.negativeInfinity;
+					gTile.rigidbody.velocity = Vector2.zero;
+					gTile.rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+					gTile.ResetNeighbours();
+				}
+			}
+		}
+	}
+
+	public void AddToGroup(LevelTile tile){
+		if(group == null){
+			group = new List<LevelTile>();
+			group.Add(this);
+		}
+		group.Add(tile);
+		foreach(LevelTile t in group){
+			if(t != this){
+				t.group.Add(this);
+				t.GetComponent<SpriteRenderer>().color = Color.magenta;
+			}
 		}
 	}
 
