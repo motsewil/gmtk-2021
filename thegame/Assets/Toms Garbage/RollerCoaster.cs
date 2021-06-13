@@ -46,6 +46,8 @@ public class RollerCoaster : MonoBehaviour {
 			index++;
 			if (index < points.Count) {
 				nextPoint = points[index];
+			}else {
+				GameManager.Instance.EndGame();
 			}
 		}
 		spriteTarget.transform.up =  Util.RoundToDegrees(velocity, 1f);

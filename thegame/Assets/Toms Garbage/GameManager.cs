@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	private int _score = 0;
 
 	public bool started = false;
+	public bool ended = false;
 
 	public UnityEvent OnStarted = new UnityEvent();
 	public UnityEvent OnGameOver = new UnityEvent();
@@ -38,7 +39,17 @@ public class GameManager : MonoBehaviour {
 	[Button]
 	public void StartGame(){
 		started = true;
+		ended = false;
 		OnStarted.Invoke();
+	}
+
+	public void EndGame(){
+		ended = true;
+		OnGameOver.Invoke();
+	}
+
+	public void Restart(){
+		UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 	}
 
 }

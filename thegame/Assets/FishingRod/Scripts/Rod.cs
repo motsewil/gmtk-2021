@@ -22,6 +22,10 @@ public class Rod : MonoBehaviour {
 			GameManager.Instance.StartGame();
 			return;
 		}
+		if(GameManager.Instance.ended){
+			GameManager.Instance.Restart();
+			return;
+		}
 		if (line.IsReeled) {
 			Vector2 dir = (reticle.position - transform.position).normalized;
 			line.Cast(dir);
